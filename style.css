@@ -1,20 +1,28 @@
 #container{
-  width: 900px;
+  width: 1000px;
   height:600px;
   border: 1px solid black;
   padding: 25px;
   margin: 50px auto;
   border-radius: 5px;
+  background-color: black;
 
 }
 #gameWindow{
-  width: 800px;
+  width: 900px;
   height: 500px;
   border: 1px solid;
   margin: 15px auto;
+  background-color: white;
 }
 input{
-  width:700px;
-  height: 25px;
+  width:800px;
+  height: 15px;
   padding: 25px;
+  font-size: 20px;
+  margin-left: 45px;
+}
+button{
+  height: 25px;
+  margin-left: 15px;
 }
