@@ -13,7 +13,10 @@
   height: 500px;
   border: 1px solid;
   margin: 10px auto;
-  background-color: white;
+  background-image: url(resources/zombiegrave.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 input{
   width:800px;
@@ -22,13 +25,16 @@ input{
   font-size: 20px;
   margin-left: 45px;
 }
-button{
+#gameStart{
   height: 25px;
-  margin-left: 15px;
+  margin-right: 15px;
+  float: left;
 }
 #typeThis{
-  width: 900px;
-  height: 50px;
-  border: 1px solid;
-  margin: 5px auto;
+  width: 800px;
+  height: 100px;
+  margin: 35px auto;
+  color: white;
+  font-size: 30px;
+
 }

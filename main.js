@@ -10,28 +10,38 @@ $(function(){
   var userInput = $("#userInput");
   var displayKeysToType = $("#typeThis");
   var gameStart = $("#gameStart");
+  // var clearOnSubmit = false;
 
     gameStart.on('click', function(){
       console.log(keysToType);
+      $("#typeThis").prepend(keysToType);
     });
 
-    $(keysToType).each(function(){
-    $("#typeThis").append(keysToType[level]);
     
-    $('document').keyup(function() {
-      console.log(event.key);
+    $('#userInput').keydown(function() {
+           console.log(event.key);
       
       if(event.key === keysToType[0]) {
         keysToType.shift();
+        $("#typeThis").text(keysToType.join(""));
         console.log(keysToType);
-      } if(keysToType.length === 0) {
-        // win logic
-        console.log("Hurrah!");
-        keysToType = window.sentances[level++].split("");
+
+
+      }else if(keysToType.length === 0) {
+        userInput.on('submit', function(e){
+          e.preventDefault();
+          displayKeysToType = "";
+          keysToType = window.sentences[level++].split("");
+          $("#typeThis").prepend(keysToType);//this is the next sentence 
+          console.log("Hurrah!");
+          console.log(keysToType);
+        })
+        
+        
       }
     });
-  });
 });
+
 
 
 
