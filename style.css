@@ -26,14 +26,20 @@ input{
   margin-left: 45px;
 }
 #gameStart{
-  height: 25px;
-  border-width: 20px;
-  margin-right: 35px;
-
+  color: red;
+  
+  margin-right: 440px;
+  margin-top: 200px;
   float: right;
   font-weight: bold;
   text-align: center;
+  background-color: silver;
+  font-size: 25px;
 }
+#gameStart:hover{
+  cursor: pointer;
+}
+
 #typeThis{
   width: 800px;
   height: 100px;
@@ -47,7 +53,7 @@ input{
   float: left;
   height:35px;
   width: 50px;
-  color: white;
+  color: gold;
   font-size: 40px;
   margin-left: 15px; 
   
@@ -58,5 +64,5 @@ input{
   margin-top: 130px;
   background-image: url("resources/runninglady.gif");
   background-size: cover;
-  transition: all 250ms linear;
+  transition: all 350ms;
 }
