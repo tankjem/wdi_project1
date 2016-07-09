@@ -38,6 +38,7 @@ input{
 }
 #gameStart:hover{
   cursor: pointer;
+  background-color: purple;
 }
 
 #typeThis{

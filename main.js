@@ -32,11 +32,15 @@ $(function(){
 
       if(event.key === keysToType[0]) {
         $('#typeThis').css("color", "white");
+        score+=10;
+        $currentScore.text(score);
         keysToType.shift();
         $typeThis.text(keysToType.join(""));
       
       }else if (event.key !== keysToType){
         $('#typeThis').css("color", "red");
+        score-=20;
+        $currentScore.text(score);
         console.log("wrong letter");
         console.log(keysToType);
       }else{
@@ -46,24 +50,23 @@ $(function(){
 
     $userInputForm.on('submit', function(e){
       e.preventDefault();
-      // $('#characterModel').css("margin-left", "25px");
-    
 
       if(keysToType.length === 0) {
         $('#characterModel').animate({
         marginLeft: "+=40"
           }, 500, function() {
-        //Complete
-          }
-        );
+          
+          });
         $userInput.val('');
         level++;
-        score++;
-        $currentScore.prepend(score);
+        score+=100;
+        $currentScore.text(score);
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
         console.log("hurrah");
-      }
+      } else if (score>1000){
+        alert("congratulations go to the next level");
+      };
     })
   };
 });
