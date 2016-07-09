@@ -27,8 +27,12 @@ input{
 }
 #gameStart{
   height: 25px;
-  margin-right: 15px;
-  float: left;
+  border-width: 20px;
+  margin-right: 35px;
+
+  float: right;
+  font-weight: bold;
+  text-align: center;
 }
 #typeThis{
   width: 800px;
@@ -36,5 +40,12 @@ input{
   margin: 35px auto;
   color: white;
   font-size: 30px;
-
+}
+#score {
+  float: left;
+  height:35px;
+  width: 50px;
+  
+  margin-left: 15px; 
+  border
 }

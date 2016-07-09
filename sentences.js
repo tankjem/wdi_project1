@@ -1,1 +1,24 @@
-window.sentences = ["I could not find shelter anywhere", "I have to keep moving",   "Behind me", "thousands of moaning souls", "It was chaos", "I was with my boyfriend when I saw it for the first time", "It wasn't fast or slow", "Just steadfast","No one seemed to notice after the first scream","A fucking zombie screamed a kid","Watch your mouth replied the mother", "and then it happened", "Chaos! I left the mall holding my boyfriends hand", "Just his hand...", "Shit. They're right behind me.", "Got to find shelter soon." ,"I haven't got many supplies.", "I don't know how long I can hold out like this.", "Just keep running.", "Sometimes it feels like there is someone watching over me","Type for your life."];
+window.sentences = [
+  "I could not find shelter anywhere",
+  "I have to keep moving",
+  "Behind me",
+  "thousands of moaning souls",
+  "It was chaos",
+  "I was with my boyfriend",
+  "when I saw it for the first time",
+  "It wasn't fast or slow", 
+  "Just steadfast",
+  "No one seemed to notice after the first scream",
+  "A fucking zombie screamed a kid",
+  "Watch your mouth replied the mother",
+  "and then it happened",
+  "Chaos! I left the mall holding my boyfriend's hand",
+  "Just his hand...",
+  "Shit. They're right behind me.",
+  "Got to find shelter soon.",
+  "I haven't got many supplies.",
+  "I don't know how long I can hold out like this.",
+  "Just keep running.",
+  "Sometimes it feels like there is someone watching over me",
+  "Type for your life."
+];

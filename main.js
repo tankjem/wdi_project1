@@ -7,39 +7,51 @@
 $(function(){
   var level = 0;
   var keysToType = window.sentences[level].split("");
-  var userInput = $("#userInput");
-  var displayKeysToType = $("#typeThis");
-  var gameStart = $("#gameStart");
+  var $userInputForm = $("#userInputForm");
+  var $userInput = $("#userInput");
+  var $typeThis = $("#typeThis");
+  var $gameStart = $("#gameStart");
+  var $score = $("#score")
   // var clearOnSubmit = false;
 
-    gameStart.on('click', function(){
-      console.log(keysToType);
-      $("#typeThis").prepend(keysToType);
-    });
+  $gameStart.on('click', function(){
+    console.log(keysToType);
+    $(this).fadeOut('slow');
+    $score.show();
+    $userInput.focus();
+    initEventHandlers();
+    //  //right a transition to the game starting so it should go down into the game starting below 
+  });
 
-    
-    $('#userInput').keydown(function() {
-           console.log(event.key);
+  
+  function initEventHandlers(){
+    $typeThis.prepend(keysToType);
+    $userInput.keydown(function() {
+         console.log(event.key);
       
       if(event.key === keysToType[0]) {
         keysToType.shift();
-        $("#typeThis").text(keysToType.join(""));
+        $typeThis.text(keysToType.join(""));//write some kind of transition for the letters maybe add something extra to show whether you are right or wrong as you type
         console.log(keysToType);
-
-
-      }else if(keysToType.length === 0) {
-        userInput.on('submit', function(e){
-          e.preventDefault();
-          displayKeysToType = "";
-          keysToType = window.sentences[level++].split("");
-          $("#typeThis").prepend(keysToType);//this is the next sentence 
-          console.log("Hurrah!");
-          console.log(keysToType);
-        })
-        
-        
       }
     });
+
+    $userInputForm.on('submit', function(e){
+      
+      e.preventDefault();
+
+      if(keysToType.length === 0) {
+//figure out a way to show that you won or loss maybe a pass score to continue to the next level and put in an array within an array  
+        $userInput.val('');
+        level++;
+        keysToType = window.sentences[level].split("");
+        $typeThis.text(keysToType.join(""));//this is the next sentence 
+        console.log("Hurrah!");
+      }
+    });
+  };
+
+
 });
 
 
@@ -49,20 +61,3 @@ $(function(){
 
 
 
-//   // var userInput = $("#textInput");
-//   // var gameStart = $("#gameStart");
-//   // gameStart.on('click', createNewSentance);
-  
-//   // function createNewSentence(){
-//   //   $(sentences).each(function(i){
-//   //     $("#typeThis").append(sentences[0]);
-
-//       // if (sentences===userInput){
-//       //   createNewSentence;
-//       // }else{
-//       //   alert("you have died");
-//       // };
-
-//     });
-//   };
-// });
