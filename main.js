@@ -8,7 +8,7 @@ $(function(){
   var $characterModel = $("#characterModel");
   var $currentScore = $("#score");
   var score = 0;
-
+  var $counter = $("#timeBox");
   //things still to do: sort out the win condition and make something happen when a player gets a letter wrong, maybe reset the sentence... If they get it right I need a mesage for them to press enter afterwards or perhaps just move on to the next word... Winner and lose conditions with a game reset at the end....
   $currentScore.hide();
   $characterModel.hide();
@@ -20,10 +20,15 @@ $(function(){
       $userInput.focus();
       var background = $("#gameWindow");
       background.css("background-image","url(resources/zomies.gif");
+      $typeThis.text("Press Enter after sentence");
+      setTimeout(function(){
+        $typeThis.text("");
+      },3000);
       setTimeout(function(){
         initEventHandlers();
         countdownTimer.startInterval();
         $characterModel.fadeIn();
+
         background.css("background-image","url(resources/zombiegrave.jpg");
         $currentScore.show();
       },11000);
@@ -105,9 +110,9 @@ $(function(){
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
         console.log("hurrah");
-      } else if (counter===0 && (score >= 1500)){
+      } else if (($counter.text === 0) && ($currentScore.text >= 1500)){
         alert("congratulations go to the next level");
-      };
+      }; 
     })
   };
 });

@@ -19,6 +19,5 @@ window.sentences = [
   "I haven't got many supplies.",
   "I don't know how long I can hold out like this.",
   "Just keep running.",
-  "Sometimes it feels like there is someone watching over me",
   "Type for your life."
 ];

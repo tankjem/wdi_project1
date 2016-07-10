@@ -56,25 +56,27 @@ input{
   width: 800px;
   height: 100px;
   margin: 35px auto;
-  margin-top: 150px;
-  text-align: left;
+  margin-top: 100px;
+  text-align: center;
   color: gold;
   font-size: 30px;
+  font-family: monospace;
 }
 #score {
-  float: left;
+  float: right;
   height:35px;
   width: 50px;
   color: gold;
   font-size: 40px;
-  margin-left: 15px;
-  margin-bottom: 250px; 
+  margin-bottom: 250px;
+  margin-right: 45px; 
   
 }
 #characterModel{
   width:100px;
   height: 100px;
-  margin-top: 100px;
+  margin-top: 120px;
+  margin-left: 15px;
   background-image: url("resources/runninglady.gif");
   background-size: cover;
   transition: all 350ms;
