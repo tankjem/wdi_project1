@@ -14,20 +14,20 @@ $(function(){
   $characterModel.hide();
   gameIntro();
 
-  function gameIntro(){
+  function gameIntro(){ // on click do all this
     $gameStart.on('click', function(){
       $(this).fadeOut('slow');
       $userInput.focus();
       var background = $("#gameWindow");
       background.css("background-image","url(resources/zomies.gif");
-      $typeThis.text("Press Enter after sentence");
+      $typeThis.text("Press Enter after sentence"); //letting them know what to do
       setTimeout(function(){
         $typeThis.text("");
       },3000);
       setTimeout(function(){
         initEventHandlers();
         countdownTimer.startInterval();
-        $characterModel.fadeIn();
+        $characterModel.fadeIn('slow');
 
         background.css("background-image","url(resources/zombiegrave.jpg");
         $currentScore.show();
@@ -37,7 +37,7 @@ $(function(){
 
 
   
-  var countdownTimer = function(){
+  var countdownTimer = function(){ //counter with a reset and a start and stop function within it.
 
        var counter = 60;
        var timer = null;
@@ -47,20 +47,20 @@ $(function(){
                $("#timeBox").html(counter);
            }
            if (counter <= 0) {
-               stopInterval();
+              stopInterval();
            }
            else {
-               counter--;
-               $("#timeBox").html(counter);
+              counter--;
+              $("#timeBox").html(counter);
            }
         }
         function reset() {
            clearInterval(timer);
-           counter=0;
+           counter = 0;
         }
         function startInterval() {
            $("#timeBox").html(counter);
-           timer= setInterval(countdown, 1000);
+           timer = setInterval(countdown, 1000);
         }
         function stopInterval() {
            clearInterval(timer);
@@ -72,18 +72,19 @@ $(function(){
     }();
   
   
-  function initEventHandlers(){
+  function initEventHandlers(){ //function dealing with the key presses
     $typeThis.prepend(keysToType);
     $userInput.keydown(function() {
 
       if(event.key === keysToType[0]) {
+
         $('#typeThis').css("color", "gold");
         score+=10;
         $currentScore.text(score);
         keysToType.shift();
         $typeThis.text(keysToType.join(""));
       
-      }else if (event.key !== keysToType){
+      }else if (event.key !== keysToType){ //if its a wrong key highlight red 
         $('#typeThis').css("color", "red");
         score-=20;
         $currentScore.text(score);
@@ -94,7 +95,7 @@ $(function(){
       };
     });
 
-    $userInputForm.on('submit', function(e){
+    $userInputForm.on('submit', function(e){ //if enter is pressed and the keytotype.length is 0 then move character right add some points and move to the next sentence...
       e.preventDefault();
 
       if(keysToType.length === 0) {
@@ -110,11 +111,23 @@ $(function(){
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
         console.log("hurrah");
-      } else if (($counter.text === 0) && ($currentScore.text >= 1500)){
-        alert("congratulations go to the next level");
-      }; 
+      } else{
+        alert("you have tasty brains..."); //if enter is pressed early 
+      };
     })
+    
   };
+
+  // function checkForWinner(){ // a function that i can call for my win conditions. If the timer reaches zero and the score is more than 1500 then you can progress if not you were eaten. Where would I call this function...
+  //   if (('#counter' === 0 && '#currentScore' >= 1500)){
+  //     alert("you have won")
+  //   }else {
+  //     alert("you have lost")
+  //   }
+  // }
+  // checkForWinner();   
+  
+  
 });
   
   
