@@ -8,30 +8,71 @@ $(function(){
   var $characterModel = $("#characterModel");
   var $currentScore = $("#score");
   var score = 0;
-  //things still to do: sort out the win condition and make something happen when a player gets a letter wrong, maybe reset the sentence... If they get it right I need a mesage for them to press enter afterwards or perhaps just move on to the next word... Winner and lose conditions with a game reset at the end....Do I do this at the beginning or after do I write a function for each do I change to OOP...too many questions not enough time
-  
+
+  //things still to do: sort out the win condition and make something happen when a player gets a letter wrong, maybe reset the sentence... If they get it right I need a mesage for them to press enter afterwards or perhaps just move on to the next word... Winner and lose conditions with a game reset at the end....
   $currentScore.hide();
   $characterModel.hide();
   gameIntro();
-  
+
   function gameIntro(){
     $gameStart.on('click', function(){
       $(this).fadeOut('slow');
       $userInput.focus();
+      var background = $("#gameWindow");
+      background.css("background-image","url(resources/zomies.gif");
       setTimeout(function(){
         initEventHandlers();
+        countdownTimer.startInterval();
         $characterModel.fadeIn();
+        background.css("background-image","url(resources/zombiegrave.jpg");
         $currentScore.show();
-      },2000);
+      },11000);
     });
   }
+
+
+  
+  var countdownTimer = function(){
+
+       var counter = 60;
+       var timer = null;
+
+       function countdown(){
+           if (counter == 60) {
+               $("#timeBox").html(counter);
+           }
+           if (counter <= 0) {
+               stopInterval();
+           }
+           else {
+               counter--;
+               $("#timeBox").html(counter);
+           }
+        }
+        function reset() {
+           clearInterval(timer);
+           counter=0;
+        }
+        function startInterval() {
+           $("#timeBox").html(counter);
+           timer= setInterval(countdown, 1000);
+        }
+        function stopInterval() {
+           clearInterval(timer);
+        }
+
+        return {
+          startInterval: startInterval
+        }
+    }();
+  
   
   function initEventHandlers(){
     $typeThis.prepend(keysToType);
     $userInput.keydown(function() {
 
       if(event.key === keysToType[0]) {
-        $('#typeThis').css("color", "white");
+        $('#typeThis').css("color", "gold");
         score+=10;
         $currentScore.text(score);
         keysToType.shift();
@@ -54,7 +95,7 @@ $(function(){
       if(keysToType.length === 0) {
         $('#characterModel').animate({
         marginLeft: "+=40"
-          }, 500, function() {
+          }, 1000, function() {
           
           });
         $userInput.val('');
@@ -64,7 +105,7 @@ $(function(){
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
         console.log("hurrah");
-      } else if (score>1000){
+      } else if (counter===0 && (score >= 1500)){
         alert("congratulations go to the next level");
       };
     })

@@ -18,6 +18,17 @@
   background-repeat: no-repeat;
 
 }
+
+#timeBox{
+  height: 35px;
+  width: 100px;
+  background-color: transparent;
+  margin-left: 400px;
+  margin-top: 15px;
+  font-size: 40px;
+  text-align: center;
+  color: gold;
+}
 input{
   width:800px;
   height: 15px;
@@ -28,7 +39,7 @@ input{
 #gameStart{
   color: red;
   
-  margin-right: 440px;
+  margin-right: 400px;
   margin-top: 200px;
   float: right;
   font-weight: bold;
@@ -47,7 +58,7 @@ input{
   margin: 35px auto;
   margin-top: 150px;
   text-align: left;
-  color: white;
+  color: gold;
   font-size: 30px;
 }
 #score {
@@ -56,13 +67,14 @@ input{
   width: 50px;
   color: gold;
   font-size: 40px;
-  margin-left: 15px; 
+  margin-left: 15px;
+  margin-bottom: 250px; 
   
 }
 #characterModel{
   width:100px;
   height: 100px;
-  margin-top: 130px;
+  margin-top: 100px;
   background-image: url("resources/runninglady.gif");
   background-size: cover;
   transition: all 350ms;
