@@ -35,6 +35,8 @@ input{
   padding: 25px;
   font-size: 20px;
   margin-left: 45px;
+  background-color: purple;
+  color: white;
 }
 #gameStart{
   color: red;
@@ -94,4 +96,9 @@ input{
   background-image: url("resources/runninglady.gif");
   background-size: cover;
   transition: all 350ms;
+}
+
+body{
+  background-image: url("resources/zombBack.jpg");
+  background-size: cover;
 }

@@ -12,29 +12,31 @@ $(function(){
   var $timeBox = $("#timeBox");
   var counter = 0;
   var gameWindow = $("#gameWindow");
-  var gameMusic = new Audio('resources/zombieTheme.mp3');
-  var victoryMusic = new Audio('resources/ff7.mp3');
-  var zomEat = new Audio ('resources/zomEat.mp3');
   var howl = new Audio ('resources/wolfHowl.mp3');
+  var gameMusic = new Audio('resources/zombieTheme.mp3');
+  var zomEat = new Audio ('resources/zomEat.mp3');
+  var gameOver = false;
   var $resetGame = $("#resetGame")
   
   $currentScore.hide();
   $resetGame.hide();
   $characterModel.hide();
-
   gameIntro();
 
+
+  
   function gameIntro(){ // on click do all this
     $gameStart.on('click', function(){
       $(this).fadeOut('slow');
       howl.play();
-      $userInput.focus();
       gameWindow.css("background-image","url(resources/zomies.gif");
-      $typeThis.text("Press Enter after typing sentence"); 
+      $typeThis.text("Press Enter after typing sentence");
       setTimeout(function(){
         $typeThis.text("");
       },3000);
+      
       setTimeout(function(){
+        $userInput.focus();
         initEventHandlers();
         gameMusic.play();
         countdownTimer.startInterval();
@@ -49,9 +51,12 @@ $(function(){
   var checkForWinner = function(){
    
     if (score >= 3000){
+      gameOver = true;
       $typeThis.text("");
-      $userInput.off('keydown');
-      setTimeout (function (){ 
+      $userInput.off("keydown");
+      setTimeout (function (){
+        
+        var victoryMusic = new Audio('resources/ff7.mp3'); 
         victoryMusic.play();
         $timeBox.hide();
         $currentScore.hide();
@@ -65,8 +70,9 @@ $(function(){
           });
       }, 200);
     }else {
+      gameOver = true;
       $typeThis.text("");
-      $userInput.off('keydown');
+      $userInput.off("keydown");
       setTimeout (function(){
         zomEat.play();
         $timeBox.hide();
@@ -74,12 +80,11 @@ $(function(){
         $currentScore.hide();
         gameWindow.css("background-image","url(resources/zombieEating.gif");
         $typeThis.text(score)
-        $typeThis.append(" You became a zombie meal");
+        $typeThis.append(" You became a zombie happy meal");
         $resetGame.show();
           $resetGame.on('click', function(){
             location.reload();
           });
-
       }, 200);
     }
   }
@@ -122,7 +127,6 @@ $(function(){
   function initEventHandlers(){ //function dealing with the key presses
     $typeThis.prepend(keysToType);
     $userInput.keydown(function() {
-
       if(event.key === keysToType[0]) {
 
         $('#typeThis').css("color", "gold");
@@ -137,38 +141,43 @@ $(function(){
         score-=50;
         $currentScore.text(score);
       }
-    });
+  });
 
     $userInputForm.on('submit', function(e){ //if enter is pressed and the keytotype.length is 0 then move character right add some points and move to the next sentence...
       e.preventDefault();
-
-      if(keysToType.length === 0) {
-        $('#characterModel').animate({ //on correct submit the character model will move forward
-        marginLeft: "+=40"
-          }, 1000, function() {
-          
-          });
-        $userInput.val('');
-        level++;
-        score+=100;
-        $currentScore.text(score);
-        keysToType = window.sentences[level].split("");
-        $typeThis.text(keysToType.join(""));
-      } else{
-        $userInput.off('keydown');
-        zomEat.play();
-        $typeThis.text("");
-        $timeBox.hide();
-        $characterModel.hide();
-        $currentScore.hide();
-        gameWindow.css("background-image","url(resources/zombieEating.gif");
-        $typeThis.text(score)
-        $typeThis.append(" You pressed enter too early and thus you were eaten alive");
-        $resetGame.show();
+      if(!gameOver) {
+        if(keysToType.length === 0) {
+          $('#characterModel').animate({ //on correct submit the character model will move forward
+          marginLeft: "+=40"
+            }, 1000, function() {
+            
+            });
+          $userInput.val('');
+          level++;
+          score+=100;
+          $currentScore.text(score);
+          keysToType = window.sentences[level].split("");
+          $typeThis.text(keysToType.join(""));
+        } 
+        else {
+          gameOver = true;
+          howl.pause();
+          gameMusic.pause();
+          $userInput.off("keydown")
+          zomEat.play();
+          $typeThis.text("");
+          $timeBox.hide();
+          $characterModel.hide();
+          $currentScore.hide();
+          gameWindow.css("background-image","url(resources/zombieEating.gif");
+          $typeThis.text(score)
+          $typeThis.append(" You pressed enter too early and thus you were eaten alive");
+          $resetGame.show();
           $resetGame.on('click', function(){
             location.reload();
           });
-      };
+        }
+      }
     }) 
   };
 });
