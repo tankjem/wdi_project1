@@ -15,9 +15,11 @@ $(function(){
   var gameMusic = new Audio('resources/zombieTheme.mp3');
   var victoryMusic = new Audio('resources/ff7.mp3');
   var zomEat = new Audio ('resources/zomEat.mp3');
+  var howl = new Audio ('resources/wolfHowl.mp3');
+  var $resetGame = $("#resetGame")
   
   $currentScore.hide();
-
+  $resetGame.hide();
   $characterModel.hide();
 
   gameIntro();
@@ -25,6 +27,7 @@ $(function(){
   function gameIntro(){ // on click do all this
     $gameStart.on('click', function(){
       $(this).fadeOut('slow');
+      howl.play();
       $userInput.focus();
       gameWindow.css("background-image","url(resources/zomies.gif");
       $typeThis.text("Press Enter after typing sentence"); 
@@ -45,8 +48,9 @@ $(function(){
 
   var checkForWinner = function(){
    
-    if (score >= 2000){
+    if (score >= 3000){
       $typeThis.text("");
+      $userInput.off('keydown');
       setTimeout (function (){ 
         victoryMusic.play();
         $timeBox.hide();
@@ -55,9 +59,14 @@ $(function(){
         gameWindow.css("background-image","url(resources/solaire.gif");
         $typeThis.text(score)
         $typeThis.append(" You have survived");
+        $resetGame.show();
+          $resetGame.on('click', function(){
+            location.reload();
+          });
       }, 200);
     }else {
       $typeThis.text("");
+      $userInput.off('keydown');
       setTimeout (function(){
         zomEat.play();
         $timeBox.hide();
@@ -66,6 +75,11 @@ $(function(){
         gameWindow.css("background-image","url(resources/zombieEating.gif");
         $typeThis.text(score)
         $typeThis.append(" You became a zombie meal");
+        $resetGame.show();
+          $resetGame.on('click', function(){
+            location.reload();
+          });
+
       }, 200);
     }
   }
@@ -141,6 +155,7 @@ $(function(){
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
       } else{
+        $userInput.off('keydown');
         zomEat.play();
         $typeThis.text("");
         $timeBox.hide();
@@ -148,8 +163,11 @@ $(function(){
         $currentScore.hide();
         gameWindow.css("background-image","url(resources/zombieEating.gif");
         $typeThis.text(score)
-        $typeThis.append(" You became a zombie meal");
-        
+        $typeThis.append(" You pressed enter too early and thus you were eaten alive");
+        $resetGame.show();
+          $resetGame.on('click', function(){
+            location.reload();
+          });
       };
     }) 
   };

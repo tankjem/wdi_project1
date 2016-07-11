@@ -51,6 +51,20 @@ input{
   cursor: pointer;
   background-color: purple;
 }
+#resetGame{
+  color: red;
+  margin-right: 450px;
+  margin-top: 50px;
+  float: right;
+  font-weight: bold;
+  text-align: center;
+  background-color: silver;
+  font-size: 25px;
+}
+#resetGame:hover{
+  cursor: pointer;
+  background-color: purple;
+}
 
 #typeThis{
   width: 800px;
@@ -59,8 +73,8 @@ input{
   margin-top: 100px;
   text-align: center;
   color: gold;
-  font-size: 40px;
-  font-family: fantasy;
+  font-size: 30px;
+  font-family: monospace;
 }
 #score {
   float: right;
