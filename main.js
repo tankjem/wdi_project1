@@ -1,4 +1,5 @@
 $(function(){
+
   var level = 0;
   var keysToType = window.sentences[level].split("");
   var $userInputForm = $("#userInputForm");
@@ -8,52 +9,84 @@ $(function(){
   var $characterModel = $("#characterModel");
   var $currentScore = $("#score");
   var score = 0;
-  var $counter = $("#timeBox");
-  //things still to do: sort out the win condition and make something happen when a player gets a letter wrong, maybe reset the sentence... If they get it right I need a mesage for them to press enter afterwards or perhaps just move on to the next word... Winner and lose conditions with a game reset at the end....
+  var $timeBox = $("#timeBox");
+  var counter = 0;
+  var gameWindow = $("#gameWindow");
+  var gameMusic = new Audio('resources/zombieTheme.mp3');
+  var victoryMusic = new Audio('resources/ff7.mp3');
+  var zomEat = new Audio ('resources/zomEat.mp3');
+  
   $currentScore.hide();
+
   $characterModel.hide();
+
   gameIntro();
 
   function gameIntro(){ // on click do all this
     $gameStart.on('click', function(){
       $(this).fadeOut('slow');
       $userInput.focus();
-      var background = $("#gameWindow");
-      background.css("background-image","url(resources/zomies.gif");
-      $typeThis.text("Press Enter after sentence"); //letting them know what to do
+      gameWindow.css("background-image","url(resources/zomies.gif");
+      $typeThis.text("Press Enter after typing sentence"); 
       setTimeout(function(){
         $typeThis.text("");
       },3000);
       setTimeout(function(){
         initEventHandlers();
+        gameMusic.play();
         countdownTimer.startInterval();
         $characterModel.fadeIn('slow');
-
-        background.css("background-image","url(resources/zombiegrave.jpg");
+        gameWindow.css("background-image","url(resources/zombiegrave.jpg");
         $currentScore.show();
       },11000);
     });
   }
 
 
+  var checkForWinner = function(){
+   
+    if (score >= 2000){
+      $typeThis.text("");
+      setTimeout (function (){ 
+        victoryMusic.play();
+        $timeBox.hide();
+        $currentScore.hide();
+        $characterModel.hide();
+        gameWindow.css("background-image","url(resources/solaire.gif");
+        $typeThis.text(score)
+        $typeThis.append(" You have survived");
+      }, 200);
+    }else {
+      $typeThis.text("");
+      setTimeout (function(){
+        zomEat.play();
+        $timeBox.hide();
+        $characterModel.hide();
+        $currentScore.hide();
+        gameWindow.css("background-image","url(resources/zombieEating.gif");
+        $typeThis.text(score)
+        $typeThis.append(" You became a zombie meal");
+      }, 200);
+    }
+  }
   
   var countdownTimer = function(){ //counter with a reset and a start and stop function within it.
+      counter = 55;
+      var timer = null;
 
-       var counter = 60;
-       var timer = null;
-
-       function countdown(){
-           if (counter == 60) {
-               $("#timeBox").html(counter);
-           }
-           if (counter <= 0) {
-              stopInterval();
-           }
-           else {
-              counter--;
-              $("#timeBox").html(counter);
-           }
+      function countdown(){
+        if (counter == 60) {
+          $("#timeBox").html(counter);
         }
+        if (counter <= 0) {
+            stopInterval();
+            checkForWinner();
+        }
+        else {
+            counter--;
+            $("#timeBox").html(counter);
+        }
+      }
         function reset() {
            clearInterval(timer);
            counter = 0;
@@ -69,7 +102,7 @@ $(function(){
         return {
           startInterval: startInterval
         }
-    }();
+  }();
   
   
   function initEventHandlers(){ //function dealing with the key presses
@@ -83,23 +116,20 @@ $(function(){
         $currentScore.text(score);
         keysToType.shift();
         $typeThis.text(keysToType.join(""));
+        console.log(event.keyCode);
       
-      }else if (event.key !== keysToType){ //if its a wrong key highlight red 
+      }else if (event.key !== keysToType[0] && event.keyCode !== 13){ //if its a wrong key highlight the words to red, having an issue where enter, shift and other keys are highlighting as red. 
         $('#typeThis').css("color", "red");
-        score-=20;
+        score-=50;
         $currentScore.text(score);
-        console.log("wrong letter");
-        console.log(keysToType);
-      }else{
-        console.log("press enter for next sentence")
-      };
+      }
     });
 
     $userInputForm.on('submit', function(e){ //if enter is pressed and the keytotype.length is 0 then move character right add some points and move to the next sentence...
       e.preventDefault();
 
       if(keysToType.length === 0) {
-        $('#characterModel').animate({
+        $('#characterModel').animate({ //on correct submit the character model will move forward
         marginLeft: "+=40"
           }, 1000, function() {
           
@@ -110,24 +140,19 @@ $(function(){
         $currentScore.text(score);
         keysToType = window.sentences[level].split("");
         $typeThis.text(keysToType.join(""));
-        console.log("hurrah");
       } else{
-        alert("you have tasty brains..."); //if enter is pressed early 
+        zomEat.play();
+        $typeThis.text("");
+        $timeBox.hide();
+        $characterModel.hide();
+        $currentScore.hide();
+        gameWindow.css("background-image","url(resources/zombieEating.gif");
+        $typeThis.text(score)
+        $typeThis.append(" You became a zombie meal");
+        
       };
-    })
-    
+    }) 
   };
-
-  // function checkForWinner(){ // a function that i can call for my win conditions. If the timer reaches zero and the score is more than 1500 then you can progress if not you were eaten. Where would I call this function...
-  //   if (('#counter' === 0 && '#currentScore' >= 1500)){
-  //     alert("you have won")
-  //   }else {
-  //     alert("you have lost")
-  //   }
-  // }
-  // checkForWinner();   
-  
-  
 });
   
   
