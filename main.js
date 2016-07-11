@@ -24,33 +24,7 @@ $(function(){
   $resetGame.hide();
   $characterModel.hide();
 
-//reset function still needs work
-  function resetGame(){
-    gameOver = false;
-    $resetGame.hide();
-    $currentScore.hide();
-    $typeThis.text("");
-    $('#userInputForm').trigger("reset");
-    level = 0;
-    score = 0;
-    time = 55;
-    keysToType = window.sentences[level].split("");
-    gameWindow.css("background-image","url(resources/zombiegrave.jpg)");
-    zomEat.pause();
-    $gameStart.show();
-  }
-  
-  function endGame (){
-    gameOver = true;
-    $userInput.off("keydown");
-    $timeBox.hide();
-    $currentScore.hide();
-    $characterModel.hide();
-    $characterModel.css("marginLeft","initial");
-    $typeThis.text(score)
-    $resetGame.show();
-
-  }
+//reset function still needs work }
   
   $gameStart.on('click', function(){
     $(this).fadeOut('slow');
@@ -78,9 +52,9 @@ $(function(){
    
     if (score >= 3000){
       setTimeout (function (){
-        
         var victoryMusic = new Audio('resources/ff7.mp3'); 
         endGame();
+        gameOver = true;
         victoryMusic.play();
         gameWindow.css("background-image","url(resources/solaire.gif");
         $typeThis.append(" You have survived");
@@ -91,6 +65,7 @@ $(function(){
     }else {
       setTimeout (function(){
         endGame();
+        gameOver = true;
         zomEat.play();
         gameWindow.css("background-image","url(resources/zombieEating.gif"); 
         $typeThis.append(" You became a zombie happy meal");
@@ -100,11 +75,38 @@ $(function(){
       }, 200);
     }
   }
+
+  function resetGame(){
+    gameOver = false;
+    $resetGame.hide();
+    $currentScore.hide();
+    $typeThis.text("");
+    $userInputForm.trigger("reset");
+    level = 0;
+    score = 0;
+    time = 55;
+    keysToType = window.sentences[level].split("");
+    gameWindow.css("background-image","url(resources/zombiegrave.jpg)");
+    zomEat.pause();
+    $gameStart.show();
+  }
+  
+  function endGame (){
+    
+    $userInput.off("keydown");
+    $timeBox.hide();
+    $currentScore.hide();
+    $characterModel.hide();
+    $characterModel.css("marginLeft","initial");
+    $typeThis.text(score)
+    $resetGame.show();
+
+  }
     
   
   function initEventHandlers(){ //function dealing with the key presses
 
-    console.log("initEventHandlers");
+    // console.log("initEventHandlers");
     $timeBox.html(time);
 
     timerId = setInterval(function() {
@@ -118,7 +120,7 @@ $(function(){
       }
     }, 1000);
 
-    console.log(timerId);
+    // console.log(timerId);
 
     $typeThis.prepend(keysToType);
     $userInput.keydown(function() {
@@ -155,6 +157,7 @@ $(function(){
         } 
         else {
           endGame();
+          gameOver = true;
           clearInterval(timerId);
           howl.pause();
           gameMusic.pause();
