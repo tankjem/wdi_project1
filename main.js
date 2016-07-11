@@ -74,7 +74,7 @@ $(function(){
           });
       }, 200);
     }
-  }
+  };
 
   function resetGame(){
     gameOver = false;
@@ -98,7 +98,7 @@ $(function(){
     $currentScore.hide();
     $characterModel.hide();
     $characterModel.css("marginLeft","initial");
-    $typeThis.text(score)
+    $typeThis.text(score);
     $resetGame.show();
 
   }
@@ -106,11 +106,11 @@ $(function(){
   
   function initEventHandlers(){ //function dealing with the key presses
 
-    // console.log("initEventHandlers");
+    console.log("initEventHandlers");
     $timeBox.html(time);
 
     timerId = setInterval(function() {
-      console.log("setInterval is running");
+      // console.log("setInterval is running");
       time--;
       $timeBox.html(time);
 
@@ -169,8 +169,8 @@ $(function(){
           });
         }
       }
-    }) 
-  };
+    }); 
+  }
 });
   
   
