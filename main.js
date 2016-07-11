@@ -23,7 +23,20 @@ $(function(){
   $characterModel.hide();
   gameIntro();
 
-
+  // function resetGame(){
+  //   $resetGame.hide();
+  //   $currentScore.hide();
+  //   $gameStart.show();
+  //   $typeThis.text(" ");
+  //   $userInput.text(" ");
+  //   level = 0;
+  //   score = 0;
+  //   counter = 55;
+  //   gameOver = false;
+  //   keysToType = window.sentences[level].split("");
+  //   gameWindow.css("background-image","url(resources/zombiegrave.jpg");
+  //   return;
+  // }
   
   function gameIntro(){ // on click do all this
     $gameStart.on('click', function(){
