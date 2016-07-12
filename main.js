@@ -97,7 +97,7 @@ $(function(){
     $timeBox.hide();
     $currentScore.hide();
     $characterModel.hide();
-    $characterModel.css('margin-left','');
+    $characterModel.css("margin-left","");
     $typeThis.text(score);
     $resetGame.show();
 
@@ -105,12 +105,9 @@ $(function(){
     
   
   function initEventHandlers(){ //function dealing with the key presses
-    console.log("event.keyCode");
-    console.log("initEventHandlers");
     $timeBox.html(time);
 
     timerId = setInterval(function() {
-      // console.log("setInterval is running");
       time--;
       $timeBox.html(time);
 
@@ -142,7 +139,6 @@ $(function(){
 
     $userInputForm.on('submit', function(e){ 
       e.preventDefault();
-      console.log(gameOver, keysToType);
       if(!gameOver) {
         if(keysToType.length === 0) {
           $('#characterModel').animate({ 
