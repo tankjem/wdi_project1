@@ -142,8 +142,9 @@ $(function(){
 
     $userInputForm.on('submit', function(e){ 
       e.preventDefault();
+      console.log(gameOver, keysToType);
       if(!gameOver) {
-        if(keysToType.length === 0 ) {
+        if(keysToType.length === 0) {
           $('#characterModel').animate({ 
           marginLeft: "+=40"
             }, 1000, function() {
