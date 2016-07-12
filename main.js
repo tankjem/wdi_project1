@@ -89,10 +89,10 @@ $(function(){
     gameWindow.css("background-image","url(resources/zombiegrave.jpg)");
     zomEat.pause();
     $gameStart.show();
+    return;
   }
   
   function endGame (){
-    
     $userInput.off("keydown");
     $timeBox.hide();
     $currentScore.hide();
@@ -100,6 +100,7 @@ $(function(){
     $characterModel.css("margin-left","");
     $typeThis.text(score);
     $resetGame.show();
+    return;
 
   }
     
