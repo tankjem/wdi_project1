@@ -31,7 +31,7 @@ $(function(){
     gameOver = false;
     howl.play();
     gameWindow.css("background-image","url(resources/zomies.gif?"+new Date().getTime().toString(32)+")");
-    $typeThis.text("Press Enter after typing a correct sentence");
+    $typeThis.text("Press Enter only after typing a correct sentence");
     setTimeout(function(){
       $typeThis.text("");
     },3000);
@@ -68,7 +68,7 @@ $(function(){
         gameOver = true;
         zomEat.play();
         gameWindow.css("background-image","url(resources/zombieEating.gif"); 
-        $typeThis.append(" You became a zombie happy meal");
+        $typeThis.append(" Nom nom nom");
           $resetGame.on('click', function(){
             resetGame();
           });
@@ -97,7 +97,7 @@ $(function(){
     $timeBox.hide();
     $currentScore.hide();
     $characterModel.hide();
-    $characterModel.css("marginLeft","initial");
+    $characterModel.css('margin-left','');
     $typeThis.text(score);
     $resetGame.show();
 
@@ -105,7 +105,7 @@ $(function(){
     
   
   function initEventHandlers(){ //function dealing with the key presses
-
+    console.log("event.keyCode");
     console.log("initEventHandlers");
     $timeBox.html(time);
 
