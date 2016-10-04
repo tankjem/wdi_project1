@@ -50,7 +50,7 @@ $(function(){
 
   var checkForWinner = function(){
    
-    if (score >= 3000){
+    if (score >= 2000){
       setTimeout (function (){
         var victoryMusic = new Audio('resources/ff7.mp3'); 
         endGame();
